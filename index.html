@@ -8,5 +8,30 @@
     <script src="js/script.js" defer></script>
 </head>
 <body>
+    <button class="dialog-btn">Open</button>
+    <div class="container">
+        <dialog class="dialog">
+            <form action="#" class="book-form">
+                <div>
+                    <label for="book-name">Name:</label>
+                    <input type="text" placeholder="Half-Life" id="book-name" required>
+                </div>
+                <div>
+                    <label for="book-author">Author:</label>
+                    <input type="text" placeholder="Valve Software" id="book-author" required>
+                </div>
+                <div>
+                    <label for="book-pages">Pages:</label>
+                    <input type="number" min="1" id="book-pages" value="3" required>
+                </div>
+                <div>
+                    <label for="book-read">Read:</label>
+                    <input type="checkbox" id="book-read">
+                </div>
+                <button>Submit</button>
+            </form>
+        </dialog>
+        <div class="book-grid"></div>
+    </div>
 </body>
 </html>
