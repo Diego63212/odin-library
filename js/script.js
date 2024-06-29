@@ -17,7 +17,7 @@ bookForm.addEventListener('submit', (e) => {
     e.preventDefault()
     const submittedBook = new Book (inputName.value, inputAuthor.value, inputPages.valueAsNumber, inputRead.checked)
     myLibrary.push(submittedBook)
-    showBooks()
+    /* showBooks() */
     dialog.close()
 })
 
@@ -34,32 +34,27 @@ function addBookToLibrary() {
 }
 // Add books from the library to the html
 function showBooks() {
-    bookGrid.innerHTML = ''
+    /* bookGrid.innerHTML = '' */
     myLibrary.forEach((element, index) => {
+        // Create the container
         const bookContainer = document.createElement('div');
         bookContainer.classList.toggle('book-container')
-        for (const property in element) {
-            if (element.hasOwnProperty(property)) {
-                const newDiv = document.createElement('div');
-                newDiv.textContent = element[property];
-                bookContainer.appendChild(newDiv)
-            }
-        }
-        const removeBookBtn = document.createElement('button')
-        removeBookBtn.textContent = 'Remove'
-        bookContainer.appendChild(removeBookBtn)
         bookContainer.dataset.index = index;
+
+        // Create remove button
+        const removeBookBtn = document.createElement('button')
+        removeBookBtn.setAttribute(alt, "Remove this book")
+        bookContainer.appendChild(removeBookBtn)
+
         bookGrid.appendChild(bookContainer)
     })
 }
 
-/* function addBook() {} */
-
 // Remove book from array and html
 containerDiv.addEventListener('click', (e) => {
-    const element = e.target.parentElement;
-    if (element.dataset.index) {
-        myLibrary.splice(element.dataset.index, 1)
+    const elementParent = e.target.parentElement;
+    if (elementParent.dataset.index) {
+        myLibrary.splice(elementParent.dataset.index, 1)
         bookGrid.removeChild(e.target.parentElement)
     }
 })

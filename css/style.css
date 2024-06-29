@@ -1,3 +1,9 @@
+html {
+    font-size: 62.5%;
+    font-family: "Roboto", sans-serif, system-ui;
+    line-height: 1.2;
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -5,10 +11,17 @@
 }
 
 body {
-    background-color: darkslategray;
+    font-size: 1.8rem;
+    background-color: rgb(21, 78, 110);
+}
+
+input {
+    font-family: inherit;
+    font-size: 100%;
 }
 
 .container {
+    padding: 1em;
 }
 
 .book-grid {
@@ -18,7 +31,37 @@ body {
 }
 
 .book-container {
-    height: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    color: white;
+    padding: 1em;
+    height: 250px;
     width: 200px;
-    background-color: chocolate;
+    border: 3px solid rgb(16, 0, 87);
+    border-radius: 6px;
+    background: linear-gradient(0deg, rgba(1,22,106,1) 0%, rgba(5,23,125,1) 10%, rgba(0,13,84,1) 83%);
+    box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.4);
+}
+
+.book-container > :first-child {
+    font-size: 2.4rem;
+    font-weight: bold;
+}
+
+.book-container button {
+    cursor: pointer;
+    background-color: transparent;
+    outline: none;
+    border: none;
+}
+
+.info-author {
+    align-self: end;
+    margin-bottom: auto;
+}
+
+.info-data {
+    display: flex;
+    justify-content: space-between;
 }
