@@ -9,8 +9,6 @@
     <script src="js/script.js" defer></script>
 </head>
 <body>
-    <button class="dialog-btn">Open</button>
-    <button class="dialog-btn" id="debugBtn">Add</button>
     <div class="container">
         <dialog class="dialog">
             <form action="#" class="book-form">
@@ -24,7 +22,7 @@
                 </div>
                 <div>
                     <label for="book-pages">Pages:</label>
-                    <input type="number" min="1" id="book-pages" value="3" required>
+                    <input type="number" min="1" id="book-pages" placeholder="3" required>
                 </div>
                 <div>
                     <label for="book-read">Read:</label>
@@ -36,9 +34,9 @@
         <div class="book-grid">
             <div class="book-container">
                 <div>Think like a programmer</div>
-                <div class="info-author">by Valve</div>
+                <div class="info-author">by V. Anton Spraul</div>
                 <div class="info-data">
-                    <div>Pages: 3</div>
+                    <div>Pages: 256</div>
                     <label>
                         Read:
                         <input type="checkbox">
@@ -48,6 +46,9 @@
                     <img src="images/icons/remove.svg" alt="Remove">
                 </button>
             </div>
+            <button class="book-container-add" title="Add a new book">
+                <img src="images/icons/book-plus.svg" width="48px">
+            </button>
         </div>
     </div>
 </body>

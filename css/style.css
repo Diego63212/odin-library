@@ -12,7 +12,12 @@ html {
 
 body {
     font-size: 1.8rem;
+    font-weight: bold;
     background-color: rgb(21, 78, 110);
+}
+
+button {
+    cursor: pointer;
 }
 
 input {
@@ -26,22 +31,27 @@ input {
 
 .book-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(200px, 225px));
     gap: 1em;
 }
 
-.book-container {
+.book-container,
+.book-container-add {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     color: white;
     padding: 1em;
     height: 250px;
-    width: 200px;
     border: 3px solid rgb(16, 0, 87);
     border-radius: 6px;
     background: linear-gradient(0deg, rgba(1,22,106,1) 0%, rgba(5,23,125,1) 10%, rgba(0,13,84,1) 83%);
-    box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.4);
+    box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.2);
+}
+
+.book-container-add {
+    justify-content: center;
+    align-items: center;
 }
 
 .book-container > :first-child {
@@ -50,7 +60,6 @@ input {
 }
 
 .book-container button {
-    cursor: pointer;
     background-color: transparent;
     outline: none;
     border: none;
@@ -65,4 +74,23 @@ input {
     display: flex;
     justify-content: space-between;
     margin-bottom: 1em;
+}
+
+.dialog {
+    border-radius: 16px;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translateX(-50%) translateY(-50%);
+    -moz-transform: translateX(-50%) translateY(-50%);
+    -ms-transform: translateX(-50%) translateY(-50%);
+    transform: translateX(-50%) translateY(-50%);
+}
+
+.book-form {
+    padding: 1em;
+}
+
+.book-form input {
+    display: block;
+
 }

@@ -1,24 +1,19 @@
-const myLibrary = [];
-const containerDiv = document.querySelector('.container')
-const bookGrid = document.querySelector('.book-grid')
-const dialogBtn = document.querySelector('.dialog-btn')
-const dialog = document.querySelector('.dialog')
-const bookForm = document.querySelector('.book-form')
-const inputName = document.querySelector('#book-name')
-const inputAuthor = document.querySelector('#book-author')
-const inputPages = document.querySelector('#book-pages')
-const inputRead = document.querySelector('#book-read')
+const myLibrary = [new Book ('Think like a programmer', 'V. Anton Spraul', '256', false)];
+const containerDiv = document.querySelector('.container');
+const bookGrid = document.querySelector('.book-grid');
+const dialog = document.querySelector('.dialog');
+const bookForm = document.querySelector('.book-form');
+const inputName = document.querySelector('#book-name');
+const inputAuthor = document.querySelector('#book-author');
+const inputPages = document.querySelector('#book-pages');
+const inputRead = document.querySelector('#book-read');
+const newBookBtn = document.querySelector('.book-container-add');
 
-const debugBtn = document.querySelector('#debugBtn')
-
-debugBtn.addEventListener('click', () => {
-    addBookToLibrary()
-    showBooks()
-})
-
-dialogBtn.addEventListener('click', () => {
+newBookBtn.addEventListener('click', () => {
     dialog.showModal()
-})
+});
+
+showBooks()
 
 bookForm.addEventListener('submit', (e) => {
     e.preventDefault()
@@ -26,7 +21,7 @@ bookForm.addEventListener('submit', (e) => {
     myLibrary.push(submittedBook)
     showBooks()
     dialog.close()
-})
+});
 
 function Book (name, author, pages, read) {
   this.name = name;
@@ -43,49 +38,57 @@ function addBookToLibrary() {
   let newBook = new Book('Hello2', 'Me', ((Math.random() * 100) + 1).toFixed(0), false)
   myLibrary.push(newBook);
 }
+
+function addBook() {
+    const bookContainer = document.createElement('div');
+    const bookName = document.createElement('div');
+    const bookAuthor = document.createElement('div');
+    const bookInfo = document.createElement('div');
+    const bookRead = document.createElement('label');
+    const readCheckbox = document.createElement('input');
+    const removeBookBtn = document.createElement('button');
+    let newAuthor = document.querySelector('.info-author');
+    
+    bookName.textContent = this.name;
+    bookAuthor.textContent = 'by ' + this.author;
+    bookAuthor.classList.toggle('info-author');
+    bookInfo.innerHTML =`<div>Pages: ${this.pages}</div>`;
+    bookInfo.classList.toggle('info-data');
+    
+    bookRead.textContent = 'Read: ';
+    readCheckbox.setAttribute('type', 'checkbox');
+    if (this.read) readCheckbox.setAttribute('checked', true);
+    
+    // Add svg in remove btn
+    removeBookBtn.innerHTML = '<img src="images/icons/remove.svg" alt="Remove">';
+    // Add event to remove book
+    removeBookBtn.addEventListener('click', () => {
+        myLibrary.splice(this.getIndex(), 1);
+        bookGrid.removeChild(bookContainer);
+    });
+    // Add event to toggle read status
+    readCheckbox.addEventListener('change', () => {
+        this.read = readCheckbox.checked;
+    });
+    
+    bookInfo.appendChild(bookRead);
+    bookRead.appendChild(readCheckbox);
+    bookContainer.appendChild(bookName);
+    bookContainer.appendChild(bookAuthor);
+    bookContainer.appendChild(bookInfo);
+    bookContainer.appendChild(removeBookBtn);
+    bookContainer.classList.toggle('book-container');
+    return bookContainer;
+}
+
 // Add books from the library to the html
 function showBooks() {
-    bookGrid.innerHTML = ''
+    const fragment = document.createDocumentFragment();
+    
     myLibrary.forEach((element) => {
-        // Create the container
-        const bookContainer = document.createElement('div');
-        const bookName = document.createElement('div');
-        const bookAuthor = document.createElement('div');
-        const bookInfo = document.createElement('div');
-        const bookRead = document.createElement('label');
-        const readCheckbox = document.createElement('input');
-        const removeBookBtn = document.createElement('button')
-        
-        bookName.textContent = element.name;
-        bookAuthor.textContent = 'by ' + element.author;
-        bookInfo.innerHTML =`<div>Pages: ${element.pages}</div>`;
-        
-        bookRead.textContent = 'Read:';
-        readCheckbox.setAttribute('type', 'checkbox');
-        if (element.read) readCheckbox.setAttribute('checked', true);
-        
-        // Add svg in remove btn
-        removeBookBtn.innerHTML = '<img src="images/icons/remove.svg" alt="Remove">'
-        // Add event to remove book
-        removeBookBtn.addEventListener('click', () => {
-            myLibrary.splice(element.getIndex(), 1)
-            bookGrid.removeChild(bookContainer);
-        })
-        // Add event to toggle read status
-        readCheckbox.addEventListener('change', () =>{
-            element.read = readCheckbox.checked
-        })
-        
-        bookContainer.classList.toggle('book-container')
-        bookAuthor.classList.toggle('info-author')
-        bookInfo.classList.toggle('info-data')
-        
-        bookInfo.appendChild(bookRead)
-        bookRead.appendChild(readCheckbox)
-        bookContainer.appendChild(bookName);
-        bookContainer.appendChild(bookAuthor);
-        bookContainer.appendChild(bookInfo);
-        bookContainer.appendChild(removeBookBtn);
-        bookGrid.appendChild(bookContainer);
-    })
+        const createBook = addBook.call(element)
+        fragment.appendChild(createBook);
+    });
+    fragment.appendChild(newBookBtn)
+    bookGrid.replaceChildren(fragment);
 }
