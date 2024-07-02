@@ -2,26 +2,13 @@ const myLibrary = [new Book ('Think like a programmer', 'V. Anton Spraul', '256'
 const containerDiv = document.querySelector('.container');
 const bookGrid = document.querySelector('.book-grid');
 const dialog = document.querySelector('.dialog');
+const dialogClose = document.querySelector('#dialog-close');
 const bookForm = document.querySelector('.book-form');
 const inputName = document.querySelector('#book-name');
 const inputAuthor = document.querySelector('#book-author');
 const inputPages = document.querySelector('#book-pages');
 const inputRead = document.querySelector('#book-read');
 const newBookBtn = document.querySelector('.book-container-add');
-
-newBookBtn.addEventListener('click', () => {
-    dialog.showModal()
-});
-
-showBooks()
-
-bookForm.addEventListener('submit', (e) => {
-    e.preventDefault()
-    const submittedBook = new Book (inputName.value, inputAuthor.value, inputPages.valueAsNumber, inputRead.checked)
-    myLibrary.push(submittedBook)
-    showBooks()
-    dialog.close()
-});
 
 function Book (name, author, pages, read) {
   this.name = name;
@@ -35,8 +22,10 @@ Book.prototype.getIndex = function () {
 }
 
 function addBookToLibrary() {
-  let newBook = new Book('Hello2', 'Me', ((Math.random() * 100) + 1).toFixed(0), false)
-  myLibrary.push(newBook);
+    const newBook = new Book (inputName.value, inputAuthor.value, inputPages.valueAsNumber, inputRead.checked);
+    myLibrary.push(newBook);
+    showBooks()
+    dialog.close()
 }
 
 function addBook() {
@@ -47,7 +36,6 @@ function addBook() {
     const bookRead = document.createElement('label');
     const readCheckbox = document.createElement('input');
     const removeBookBtn = document.createElement('button');
-    let newAuthor = document.querySelector('.info-author');
     
     bookName.textContent = this.name;
     bookAuthor.textContent = 'by ' + this.author;
@@ -84,7 +72,6 @@ function addBook() {
 // Add books from the library to the html
 function showBooks() {
     const fragment = document.createDocumentFragment();
-    
     myLibrary.forEach((element) => {
         const createBook = addBook.call(element)
         fragment.appendChild(createBook);
@@ -92,3 +79,16 @@ function showBooks() {
     fragment.appendChild(newBookBtn)
     bookGrid.replaceChildren(fragment);
 }
+
+showBooks()
+
+newBookBtn.addEventListener('click', () => {
+    dialog.showModal()
+});
+
+bookForm.addEventListener('submit', (e) => {
+    e.preventDefault()
+    addBookToLibrary()
+});
+
+dialogClose.addEventListener('click', () => dialog.close())

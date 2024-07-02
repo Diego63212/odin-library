@@ -20,9 +20,18 @@ button {
     cursor: pointer;
 }
 
-input {
+input,
+button {
     font-family: inherit;
     font-size: 100%;
+}
+
+label + input {
+    margin-top: 3px;
+}
+
+input + label {
+    margin-top: 6px;
 }
 
 .container {
@@ -42,7 +51,7 @@ input {
     justify-content: space-between;
     color: white;
     padding: 1em;
-    height: 250px;
+    min-height: 250px;
     border: 3px solid rgb(16, 0, 87);
     border-radius: 6px;
     background: linear-gradient(0deg, rgba(1,22,106,1) 0%, rgba(5,23,125,1) 10%, rgba(0,13,84,1) 83%);
@@ -92,5 +101,30 @@ input {
 
 .book-form input {
     display: block;
+}
 
+.book-form > div {
+    margin-bottom: 0.5em;
+}
+
+.btn-row {
+    display: flex;
+    margin-top: 0.5em;
+    gap: 1em;
+}
+
+.form-btn {
+    padding: 6px;
+    border-radius: 6px;
+    font-weight: bold;
+    font-size: 0.8em;
+    flex: 1;
+}
+
+.form-submit {
+    background-color: rgb(166, 255, 166);
+}
+
+.form-close {
+    background-color: rgb(253, 188, 188);
 }
