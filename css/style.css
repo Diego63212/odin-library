@@ -13,7 +13,15 @@ html {
 body {
     font-size: 1.8rem;
     font-weight: bold;
-    background-color: rgb(21, 78, 110);
+    background-color: rgb(52, 64, 71);
+}
+input {
+    padding: 0.5rem;
+}
+
+input[type=checkbox] {
+    height: 16px;
+    width: 16px;
 }
 
 button {
@@ -81,6 +89,7 @@ input + label {
 
 .info-data {
     display: flex;
+    align-items: center;
     justify-content: space-between;
     margin-bottom: 1em;
 }

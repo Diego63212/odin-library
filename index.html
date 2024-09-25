@@ -14,23 +14,23 @@
             <form action="#" class="book-form">
                 <div>
                     <label for="book-name">Name:</label>
-                    <input type="text" placeholder="Half-Life" id="book-name" required>
+                    <input type="text" placeholder="Half-Life" id="book-name" name="book-name" required>
                 </div>
                 <div>
                     <label for="book-author">Author:</label>
-                    <input type="text" placeholder="Valve Software" id="book-author" required>
+                    <input type="text" placeholder="Valve Software" id="book-author" name="book-author" required>
                 </div>
                 <div>
                     <label for="book-pages">Pages:</label>
-                    <input type="number" min="1" id="book-pages" placeholder="3" required>
+                    <input type="number" min="1" id="book-pages" placeholder="3" name="book-pages" required>
                 </div>
-                <div>
+                <div class="btn-row">
                     <label for="book-read">Read:</label>
-                    <input type="checkbox" id="book-read">
+                    <input type="checkbox" id="book-read" name="book-read">
                 </div>
                 <div class="btn-row">
                     <button class="form-btn form-submit">Submit</button>
-                    <button class="form-btn form-close" id="dialog-close">Close</button>
+                    <button type="button" class="form-btn form-close" id="dialog-close">Close</button>
                 </div>
             </form>
         </dialog>
