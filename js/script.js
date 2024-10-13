@@ -1,4 +1,4 @@
-const myLibrary = [new Book ('Think like a programmer', 'V. Anton Spraul', '256', false)];
+const myLibrary = [];
 const containerDiv = document.querySelector('.container');
 const bookGrid = document.querySelector('.book-grid');
 const dialog = document.querySelector('.dialog');
@@ -10,22 +10,23 @@ const inputPages = document.querySelector('#book-pages');
 const inputRead = document.querySelector('#book-read');
 const newBookBtn = document.querySelector('.book-container-add');
 
-function Book (name, author, pages, read) {
-  this.name = name;
-  this.author = author;
-  this.pages = pages;
-  this.read = read;
-}
+class Book {
+    constructor(name, author, pages, read) {
+        this.name = name;
+        this.author = author;
+        this.pages = pages;
+        this.read = read;
+    }
 
-Book.prototype.getIndex = function () {
-    myLibrary.indexOf(this);
+    static getIndex() {
+        return myLibrary.indexOf(this);
+    }
 }
 
 function addBookToLibrary() {
-    const newBook = new Book (inputName.value, inputAuthor.value, inputPages.valueAsNumber, inputRead.checked);
-    myLibrary.push(newBook);
-    showBooks()
-    dialog.close()
+    myLibrary.push(new Book (inputName.value, inputAuthor.value, inputPages.valueAsNumber, inputRead.checked));
+    dialog.close();
+    showBooks();
 }
 
 function addBook() {
@@ -51,7 +52,7 @@ function addBook() {
     removeBookBtn.innerHTML = '<img src="images/icons/remove.svg" alt="Remove">';
     // Add event to remove book
     removeBookBtn.addEventListener('click', () => {
-        myLibrary.splice(this.getIndex(), 1);
+        myLibrary.splice(Book.getIndex(), 1);
         bookGrid.removeChild(bookContainer);
     });
     // Add event to toggle read status
@@ -76,19 +77,21 @@ function showBooks() {
         const createBook = addBook.call(element)
         fragment.appendChild(createBook);
     });
-    fragment.appendChild(newBookBtn)
+    fragment.appendChild(newBookBtn);
     bookGrid.replaceChildren(fragment);
 }
 
-showBooks()
-
 newBookBtn.addEventListener('click', () => {
-    dialog.showModal()
+    dialog.showModal();
 });
 
 bookForm.addEventListener('submit', (e) => {
-    e.preventDefault()
-    addBookToLibrary()
+    e.preventDefault();
+    addBookToLibrary();
 });
 
-dialogClose.addEventListener('click', () => dialog.close())
+dialogClose.addEventListener('click', () => dialog.close());
+
+myLibrary.push(new Book ('Think like a programmer', 'V. Anton Spraul', '256', false)); // Add default book
+
+showBooks(); // Render default book
